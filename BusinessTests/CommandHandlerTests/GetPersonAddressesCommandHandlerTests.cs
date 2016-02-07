@@ -19,7 +19,7 @@ namespace BusinessTests.CommandHandlerTests
         public void ExecuteMethodShouldThrowArgumentNullExceptionIfInputArgumentIsNull()
         {
             appContextMock = new Mock<IAppContextAdapter>();
-            commandHandler = new GetPersonAddressesCommandHandler(appContextMock.Object);
+            commandHandler = new GetAddressesByPersonCommandHandler(appContextMock.Object);
 
             Assert.Throws<ArgumentNullException>(() => commandHandler.Execute(null));
         }
@@ -29,7 +29,7 @@ namespace BusinessTests.CommandHandlerTests
             [Values(0, -1, -100, -1000, -1000000000)] int personId)
         {
             appContextMock = new Mock<IAppContextAdapter>();
-            commandHandler = new GetPersonAddressesCommandHandler(appContextMock.Object);
+            commandHandler = new GetAddressesByPersonCommandHandler(appContextMock.Object);
 
             var command = new GetAddressesByPersonCommand()
             {
@@ -46,7 +46,7 @@ namespace BusinessTests.CommandHandlerTests
             appContextMock = new Mock<IAppContextAdapter>();
             appContextMock.Setup(context => context.Select(It.Is<GetAddressesByPersonIdQuery>(x => x.PersonId == personId)))
                 .Returns(null as QueryResult);
-            commandHandler = new GetPersonAddressesCommandHandler(appContextMock.Object);
+            commandHandler = new GetAddressesByPersonCommandHandler(appContextMock.Object);
 
             Assert.Throws<NullReferenceException>(() => commandHandler.Execute(new GetAddressesByPersonCommand()
             {
@@ -64,7 +64,7 @@ namespace BusinessTests.CommandHandlerTests
                 {
                     PersonId = personId
                 });
-            commandHandler = new GetPersonAddressesCommandHandler(appContextMock.Object);
+            commandHandler = new GetAddressesByPersonCommandHandler(appContextMock.Object);
 
             var commandResult = commandHandler.Execute(new GetAddressesByPersonCommand()
             {

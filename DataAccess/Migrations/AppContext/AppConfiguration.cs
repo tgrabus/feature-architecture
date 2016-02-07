@@ -1,22 +1,23 @@
 using Models.Entities.AppContext;
 
-namespace DataAccess.Migrations
+namespace DataAccess.Migrations.AppContext
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DataAccess.Implementation.DbContexts.AppContext>
+    internal sealed class AppConfiguration : DbMigrationsConfiguration<DataAccess.Implementation.DbContexts.AppContext>
     {
-        public Configuration()
+        public AppConfiguration()
         {
             AutomaticMigrationsEnabled = false;
+            MigrationsDirectory = @"Migrations\AppContext";
         }
 
         protected override void Seed(DataAccess.Implementation.DbContexts.AppContext context)
         {
-            context.Persons.AddOrUpdate(person => new { person.FirstName, person.LastName }, new []
+            context.Persons.AddOrUpdate(person => new { person.FirstName, person.LastName }, new[]
             {
                 new Person()
                 {

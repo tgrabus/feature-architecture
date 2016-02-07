@@ -1,4 +1,4 @@
-namespace DataAccess.Migrations
+namespace DataAccess.Migrations.IdentityContext
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -7,31 +7,6 @@ namespace DataAccess.Migrations
     {
         public override void Up()
         {
-            CreateTable(
-                "dbo.Addresses",
-                c => new
-                    {
-                        Id = c.Int(nullable: false),
-                        OccupantId = c.Int(nullable: false),
-                        Street = c.String(),
-                        City = c.String(),
-                        HouseNumber = c.String(),
-                        FlatNumber = c.String(),
-                    })
-                .PrimaryKey(t => new { t.Id, t.OccupantId })
-                .ForeignKey("dbo.People", t => t.OccupantId, cascadeDelete: true)
-                .Index(t => t.OccupantId);
-            
-            CreateTable(
-                "dbo.People",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(),
-                        LastName = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
-            
             CreateTable(
                 "dbo.Roles",
                 c => new
@@ -108,21 +83,17 @@ namespace DataAccess.Migrations
             DropForeignKey("dbo.UserLogins", "UserId", "dbo.Users");
             DropForeignKey("dbo.UserClaims", "UserId", "dbo.Users");
             DropForeignKey("dbo.UserRoles", "RoleId", "dbo.Roles");
-            DropForeignKey("dbo.Addresses", "OccupantId", "dbo.People");
             DropIndex("dbo.UserLogins", new[] { "UserId" });
             DropIndex("dbo.UserClaims", new[] { "UserId" });
             DropIndex("dbo.Users", "UserNameIndex");
             DropIndex("dbo.UserRoles", new[] { "RoleId" });
             DropIndex("dbo.UserRoles", new[] { "UserId" });
             DropIndex("dbo.Roles", "RoleNameIndex");
-            DropIndex("dbo.Addresses", new[] { "OccupantId" });
             DropTable("dbo.UserLogins");
             DropTable("dbo.UserClaims");
             DropTable("dbo.Users");
             DropTable("dbo.UserRoles");
             DropTable("dbo.Roles");
-            DropTable("dbo.People");
-            DropTable("dbo.Addresses");
         }
     }
 }

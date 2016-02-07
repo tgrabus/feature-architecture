@@ -17,6 +17,7 @@ namespace DataAccess.Infrastructure
         {
             base.Load(builder);
 
+            builder.RegisterType<IdentityContext>().InstancePerRequest();
             builder.RegisterType<AppContext>().As<IAppContext>().InstancePerRequest();
             builder.RegisterType<AppContextAdapter>().As<IAppContextAdapter>().InstancePerRequest();
             builder.RegisterType<UserManagerAdapter>().As<IUserManagerAdapter>().InstancePerRequest();
@@ -24,7 +25,7 @@ namespace DataAccess.Infrastructure
                 .WithParameter(
                     new ResolvedParameter(
                         (param, ctx) => param.ParameterType == typeof (DbContext),
-                        (param, ctx) => ctx.Resolve<IAppContext>()));
+                        (param, ctx) => ctx.Resolve<IdentityContext>()));
 
             builder.RegisterType<MappingEngine>().As<IMappingEngine>();
             builder.RegisterAssemblyTypes(GetType().Assembly).Where(x => x.Name.EndsWith("Profile")).As<Profile>().SingleInstance();

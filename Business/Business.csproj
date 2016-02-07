@@ -103,7 +103,7 @@
     <Compile Include="Dispatchers\ICommandDispatcherAsync.cs" />
     <Compile Include="Dispatchers\ICommandDispatcher.cs" />
     <Compile Include="CommandHandlers\ICommandHandler.cs" />
-    <Compile Include="Implementation\CommandHandlers\GetPersonAddressesCommandHandler.cs" />
+    <Compile Include="Implementation\CommandHandlers\GetAddressesByPersonCommandHandler.cs" />
     <Compile Include="Implementation\CommandHandlers\ResolveUserIdentityCommandHandler.cs" />
     <Compile Include="Implementation\Dispatchers\CommandDispatcher.cs" />
     <Compile Include="Infrastructure\AutofacModule.cs" />

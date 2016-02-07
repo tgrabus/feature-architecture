@@ -8,13 +8,13 @@ using DataAccess.Queries;
 
 namespace Business.Implementation.CommandHandlers
 {
-    public class GetPersonAddressesCommandHandler : 
+    public class GetAddressesByPersonCommandHandler : 
         ICommandHandler<GetAddressesByPersonCommand>,
         ICommandHandlerAsync<GetAddressesByPersonCommand>
     {
         private readonly IAppContextAdapter context;
 
-        public GetPersonAddressesCommandHandler(IAppContextAdapter context)
+        public GetAddressesByPersonCommandHandler(IAppContextAdapter context)
         {
             this.context = context;
         }
